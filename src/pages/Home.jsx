@@ -1,74 +1,88 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import courses from '../data/courses.json'; // Imports JSON file with course information
+import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import CourseCard from '../components/CourseCard.jsx'
+import CourseFilters from '../components/CourseFilters.jsx'
+import EmptyState from '../components/EmptyState.jsx'
+import { courses } from '../data/catalog.js'
+import { usePlanner } from '../state/PlannerContext.jsx'
+import { CAP_CREDIT_THRESHOLD, TUITION_CAP } from '../config.js'
+import { DEFAULT_FILTERS, filterCourses, levelsOf } from '../utils/filterCourses.js'
+import { formatMoney } from '../utils/pricing.js'
 
-export default function Home() {
-  const navigate = useNavigate();
+const levels = levelsOf(courses)
 
-  // Gets categories from the file for the courses
-  const categories = [...new Set(courses.map(course => course.category))];
+const steps = [
+  { title: 'Pick courses', text: 'Browse the CPRE course list and add what you want to your cart.' },
+  { title: 'Plan semesters', text: 'Drop them into Spring or Fall of any year and watch the credits add up.' },
+  { title: 'Pay per semester', text: `See the cost live. Past ${CAP_CREDIT_THRESHOLD} credits the bill tops out at ${formatMoney(TUITION_CAP)}.` },
+]
 
-  // Handler to navigate to details page and pass selected object
-  const handleViewDetails = (course) => {
-    navigate('/course-details', { state: { course } });
-  };
+function Home() {
+  const { state, selectedCount } = usePlanner()
+  const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  const visible = useMemo(() => filterCourses(courses, filters), [filters])
 
   return (
-    <div className="min-h-screen bg-[var(--color-espresso)] p-6 text-[var(--color-text)] md:p-8">
-      {/* Main Header / Netflix Title Banner */}
-      <header className="mb-8 text-center">
-        <h1 className="text-4xl font-extrabold tracking-wider text-[var(--color-gold)]">CourseFlow</h1>
-        <p className="mt-2 text-[var(--color-muted)]">Explore top-rated technical and engineering courses</p>
-      </header>
-
-      {/* Map through each category to create Netflix-style rows */}
-      {categories.map((category) => {
-        const categoryCourses = courses.filter((c) => c.category === category);
-        return (
-          <div key={category} className="mb-8">
-            <h2 className="mb-4 border-l-4 border-[var(--color-gold)] px-2 text-2xl font-semibold">
-              {category}
-            </h2>
-
-            {/* Horizontal Scrollable Carousel Container */}
-            <div className="flex space-x-6 overflow-x-auto pb-4">
-              {categoryCourses.map((course) => (
-                <div
-                  key={course.id}
-                  className="flex min-w-[280px] max-w-[280px] shrink-0 flex-col justify-between overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl transition duration-300 hover:scale-105"
-                >
-                  {/* Course Thumbnail & Info */}
-                  <div>
-                    <img
-                      src={course.thumbnail}
-                      alt={course.title}
-                      className="w-full h-40 object-cover"
-                    />
-                    <div className="p-4">
-                      <span className="text-xs font-semibold uppercase tracking-wide text-[var(--color-gold)]">
-                        {course.code}
-                      </span>
-                      <h3 className="text-lg font-bold mt-1 line-clamp-1">{course.title}</h3>
-                      <p className="mt-1 text-sm text-[var(--color-muted)]">Instructor: {course.instructor}</p>
-                      <p className="mt-2 text-sm font-semibold text-[var(--color-gold-bright)]">${course.price}</p>
-                    </div>
-                  </div>
-
-                  {/* View Details Button */}
-                  <div className="p-4 pt-0">
-                    <button
-                      onClick={() => handleViewDetails(course)}
-                      className="w-full cursor-pointer bg-[var(--color-gold)] py-2 font-medium text-[#1b120d] transition hover:bg-[var(--color-gold-bright)]"
-                    >
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+    <main id="main">
+      <section className="hero">
+        <div className="container hero__inner">
+          <p className="eyebrow eyebrow--gold">Iowa State · Computer Engineering</p>
+          <h1>Plan every CPRE semester before it starts.</h1>
+          <p className="lead lead--light">
+            CourseFlow lets you build a cart of courses, place them into semesters, check prerequisites and
+            see exactly what each semester costs.
+          </p>
+          <div className="row">
+            <Link to="/planner" className="btn btn--gold">
+              Open my planner
+            </Link>
+            <Link to="/cart" className="btn btn--ghost btn--on-dark">
+              Cart{selectedCount > 0 || state.cart.length > 0 ? ` (${state.cart.length})` : ''}
+            </Link>
           </div>
-        );
-      })}
-    </div>
-  );
+          <ol className="steps">
+            {steps.map((step, index) => (
+              <li key={step.title} className="step">
+                <span className="step__num">{index + 1}</span>
+                <div>
+                  <h2>{step.title}</h2>
+                  <p>{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <div className="container page">
+        <div className="page-head">
+          <p className="eyebrow">Course catalog</p>
+          <h2 className="page-head__title">Find your next courses</h2>
+        </div>
+
+        <CourseFilters filters={filters} levels={levels} onChange={setFilters} resultCount={visible.length} />
+
+        {visible.length === 0 ? (
+          <EmptyState
+            title="No courses match"
+            action={
+              <button type="button" className="btn btn--primary" onClick={() => setFilters(DEFAULT_FILTERS)}>
+                Clear filters
+              </button>
+            }
+          >
+            Try a different search or clear the filters.
+          </EmptyState>
+        ) : (
+          <div className="course-grid">
+            {visible.map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
+  )
 }
+
+export default Home
