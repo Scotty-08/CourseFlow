@@ -1,20 +1,5 @@
-@import "tailwindcss";
-
-:root {
-  color-scheme: dark;
-  --color-espresso: #120d0a;
-  --color-surface: #211713;
-  --color-border: #503a2c;
-  --color-text: #f2e6d3;
-  --color-muted: #b9a48b;
-  --color-gold: #c6a36a;
-  --color-gold-bright: #e2ca91;
-  --color-wine: #4b2222;
-  --color-error: #e7aaa0;
-}
-
-body {
-  margin: 0;
-  background: var(--color-espresso);
-  color: var(--color-text);
-}
+@import 'tailwindcss';
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/components.css';
+@import './styles/pages.css';
