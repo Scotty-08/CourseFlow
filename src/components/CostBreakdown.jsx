@@ -26,7 +26,7 @@ function CostBreakdown({ pricing }) {
       </div>
       {overThreshold && !capApplied && (
         <p className="cost__note">
-          Over {threshold} credits, so the {formatMoney(cap)} cap applies. It starts lowering your bill at{' '}
+          Over {threshold} credits: this semester is capped at {formatMoney(cap)}, which starts to matter at{' '}
           {creditsUntilCapBinds()} credits.
         </p>
       )}

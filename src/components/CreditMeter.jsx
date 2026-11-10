@@ -26,7 +26,7 @@ function CreditMeter({ credits, threshold = CAP_CREDIT_THRESHOLD, max = SCALE_MA
       </div>
       <div className="meter__labels">
         <span>{credits} credits</span>
-        <span>{credits > threshold ? 'Over 12 · cap rule applies' : credits === threshold ? 'Full-time (12)' : credits > 0 ? `${threshold - credits} to full-time` : 'Empty'}</span>
+        <span>{credits > threshold ? `Over ${threshold} credits` : credits === threshold ? 'Full-time (12)' : credits > 0 ? `${threshold - credits} to full-time` : 'Empty'}</span>
       </div>
     </div>
   )
