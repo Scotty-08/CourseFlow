@@ -17,7 +17,7 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--color-espresso)] p-6 text-[var(--color-text)] md:p-8">
       {/* Main Header / Netflix Title Banner */}
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-extrabold tracking-wider text-[var(--color-gold)]">SkillFlix</h1>
+        <h1 className="text-4xl font-extrabold tracking-wider text-[var(--color-gold)]">CourseFlow</h1>
         <p className="mt-2 text-[var(--color-muted)]">Explore top-rated technical and engineering courses</p>
       </header>
 
