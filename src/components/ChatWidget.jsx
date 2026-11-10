@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { courses, getCourse } from '../data/catalog.js'
-import { useToast } from '../hooks/useToast.js'
 import { usePlanner } from '../state/PlannerContext.jsx'
 import { reply, SUGGESTED_PROMPTS } from '../utils/chatbot.js'
 import { buildSuggestion } from '../utils/planFromState.js'
@@ -15,7 +14,6 @@ const GREETING = {
 function ChatWidget() {
   const planner = usePlanner()
   const { state, dispatch, semesters, progress, satisfied } = planner
-  const { notify } = useToast()
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([GREETING])
@@ -53,7 +51,6 @@ function ChatWidget() {
 
     if (answer.action?.type === 'dispatch') dispatch(answer.action.action)
     if (answer.action?.type === 'suggest') followUp = runSuggestion()
-    if (answer.action) notify('Assistant updated your planner')
 
     setMessages((current) => [
       ...current,
