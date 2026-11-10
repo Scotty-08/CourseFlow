@@ -695,6 +695,17 @@
     display: none !important;
   }
 
+  .planner-side,
+  .semester__foot,
+  .semester-course__move,
+  .hero {
+    display: none !important;
+  }
+
+  .planner-layout {
+    grid-template-columns: 1fr;
+  }
+
   body {
     background: #fff;
     color: #000;
