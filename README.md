@@ -14,6 +14,8 @@ them into a multi-semester planner.
 
 > Screenshots were captured in an offline sandbox, so course thumbnails show the built-in grid tiles.
 
+**Live site:** https://scotty-08.github.io/CourseFlow/ (once GitHub Pages is switched on for the repo; see Deploying below)
+
 ## What it does
 
 - **Catalog** of 33 CPRE-track courses with search, category chips, level filter and sorting.
@@ -85,3 +87,16 @@ tests/                 node:test suites for all of the logic above
 
 The rules (pricing, prerequisites, plan generation, reducer, checkout validation, filtering) are plain
 JavaScript with no dependencies, so they run in Node without a browser.
+
+## Deploying
+
+CourseFlow is a static site: the whole app runs in the visitor's browser and saves to their own
+localStorage, so it needs no server. Pushes to `main` run `.github/workflows/deploy.yml`, which tests,
+builds and publishes to GitHub Pages.
+
+One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**. Then push or
+run the workflow from the Actions tab. The router uses `#` links (like `/#/planner`) so refreshing and
+sharing a page link work on static hosting.
+
+Because there is no backend, each visitor has their own plan; plans do not sync between devices and
+payments stay a demo. Real accounts, shared plans or real payments would need a server.
