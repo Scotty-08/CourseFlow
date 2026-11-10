@@ -1,22 +1,31 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import SiteFooter from './components/SiteFooter.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
+import Cart from './pages/Cart.jsx'
+import Checkout from './pages/Checkout.jsx'
 import CourseDetails from './pages/CourseDetails.jsx'
-import Enrollment from './pages/Enrollment.jsx'
 import Home from './pages/Home.jsx'
-import Payment from './pages/Payment.jsx'
+import Planner from './pages/Planner.jsx'
+import Receipt from './pages/Receipt.jsx'
 
 function App() {
   return (
-    <div className="min-h-screen bg-[var(--color-espresso)] text-[var(--color-text)]">
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <SiteHeader />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/course-details" element={<CourseDetails />} />
-        <Route path="/enrollment" element={<Enrollment />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/course/:id" element={<CourseDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/planner" element={<Planner />} />
+        <Route path="/checkout/:semesterId" element={<Checkout />} />
+        <Route path="/receipt/:semesterId" element={<Receipt />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </div>
+      <SiteFooter />
+    </>
   )
 }
 
