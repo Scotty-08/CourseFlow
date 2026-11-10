@@ -7,11 +7,12 @@ Expanded from **SkillFlix**, the COM S 3190 Assignment 2 course-browsing app by 
 Scott Gray. The original catalog, routing and checkout ideas are the starting point; CourseFlow turns
 them into a multi-semester planner.
 
-![Catalog](docs/screenshots/home.png)
+![Home, dark theme](docs/screenshots/home.png)
 ![Planner](docs/screenshots/planner.png)
+![Assistant](docs/screenshots/assistant.png)
+![Home, light theme](docs/screenshots/light.png)
 
-> Screenshots were captured in an offline sandbox, so course thumbnails show the built-in fallback
-> tiles. With internet access the cards show the real course images.
+> Screenshots were captured in an offline sandbox, so course thumbnails show the built-in grid tiles.
 
 ## What it does
 
@@ -26,6 +27,13 @@ them into a multi-semester planner.
 - **Already completed** list for transfer credit or past classes, which feeds prerequisites and progress.
 - **Degree progress** across the requirement list (done, planned, remaining credits).
 - **Per-semester checkout** with validation and a printable receipt. A paid semester locks.
+- **Mini assistant** (`>_` button, bottom right). Ask "what do I need before CPRE 3080?", "how does the cap
+  work?", "check my plan", or give commands like "add MATH 1650 to my cart", "plan CPRE 2810 in fall 2027",
+  "I took ENGL 1500", "suggest a plan". It is a **rule-based helper, not an AI model**: it matches
+  patterns, answers from the catalog and your plan, and nothing you type leaves the browser.
+- **Black-and-white terminal look** with a dark default, a light theme toggle, mono type, and **glitch
+  animations** on primary buttons (hover or focus) and now and then on the hero title. Turned off for
+  anyone with reduced-motion enabled.
 - Plan **copy-as-text** and **print**. Everything is saved in your browser (localStorage).
 
 ## The $8,000 cap
@@ -61,7 +69,7 @@ npm run lint
 npm run build
 ```
 
-Stack: React 19, Vite, Tailwind CSS 4 (tokens; the UI uses its own CSS), react-router-dom 7.
+Stack: React 19, Vite, Tailwind CSS 4 (imported; the UI runs on its own hand-written CSS in `src/styles`), react-router-dom 7, JetBrains Mono and Inter via Fontsource.
 
 ## Project layout
 
@@ -70,7 +78,7 @@ src/
   config.js            pricing numbers, cap mode, terms
   data/                catalog, prerequisites, requirement slots
   state/               pure reducer + selectors, React context
-  utils/               pricing, semesters, prereq checks, plan generator, checkout, filters
+  utils/               pricing, semesters, prereq checks, plan generator, checkout, filters, assistant
   components/ pages/   UI
 tests/                 node:test suites for all of the logic above
 ```
