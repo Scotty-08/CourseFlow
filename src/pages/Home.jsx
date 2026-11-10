@@ -18,7 +18,7 @@ const steps = [
 ]
 
 function Home() {
-  const { state, selectedCount } = usePlanner()
+  const { state } = usePlanner()
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
   const visible = useMemo(() => filterCourses(courses, filters), [filters])
 
@@ -26,21 +26,46 @@ function Home() {
     <main id="main">
       <section className="hero">
         <div className="container hero__inner">
-          <p className="eyebrow eyebrow--gold">Iowa State · Computer Engineering</p>
-          <h1>Plan every CPRE semester before it starts.</h1>
-          <p className="lead lead--light">
-            CourseFlow lets you build a cart of courses, place them into semesters, check prerequisites and
-            see exactly what each semester costs.
-          </p>
-          <div className="row">
-            <Link to="/planner" className="btn btn--gold">
-              Open my planner
-            </Link>
-            <Link to="/cart" className="btn btn--ghost btn--on-dark">
-              Cart{selectedCount > 0 || state.cart.length > 0 ? ` (${state.cart.length})` : ''}
-            </Link>
+          <div className="hero__copy">
+            <p className="eyebrow">Iowa State · Computer Engineering</p>
+            <h1>
+              <span className="glitch-text" data-text="Compile your degree plan.">
+                Compile your degree plan.
+              </span>
+            </h1>
+            <p className="lead lead--light">
+              Build a cart of CPRE courses, schedule them into semesters, catch prerequisite bugs before
+              they ship, and see exactly what each semester costs.
+            </p>
+            <div className="row">
+              <Link to="/planner" className="btn btn--primary">
+                Open planner
+              </Link>
+              <Link to="/cart" className="btn btn--ghost">
+                Cart{state.cart.length > 0 ? ` (${state.cart.length})` : ''}
+              </Link>
+            </div>
           </div>
-          <ol className="steps">
+
+          <div className="term" aria-hidden="true">
+            <div className="term__bar">
+              <span className="term__dot" />
+              <span className="term__dot" />
+              <span className="term__dot" />
+              <span className="term__title">courseflow — zsh</span>
+            </div>
+            <pre className="term__body">
+              <span className="term__prompt">$</span> courseflow plan --major cpre{'\n'}
+              <span className="term__ok">✓</span> loaded {courses.length} courses{'\n'}
+              <span className="term__ok">✓</span> resolved prerequisite graph{'\n'}
+              <span className="term__warn">!</span> MATH 1660 scheduled before MATH 1650{'\n'}
+              <span className="term__dim">  fix: move MATH 1660 to a later semester</span>{'\n'}
+              <span className="term__ok">✓</span> {formatMoney(TUITION_CAP)} cap applies past {CAP_CREDIT_THRESHOLD} credits{'\n'}
+              <span className="term__prompt">$</span> <span className="term__cursor" />
+            </pre>
+          </div>
+
+          <ol className="steps hero__steps">
             {steps.map((step, index) => (
               <li key={step.title} className="step">
                 <span className="step__num">{index + 1}</span>
