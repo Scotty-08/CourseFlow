@@ -1,74 +1,81 @@
-/* Design tokens. Iowa State cardinal and gold on a warm paper background. */
+/* Design tokens: black and white, terminal-flavored. */
 
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --color-cardinal: #c8102e;
-  --color-gold: #f1be48;
+  --font-display: 'JetBrains Mono Variable', ui-monospace, monospace;
 }
 
 :root {
-  color-scheme: light;
+  /* Monochrome terminal theme. Dark is the default; light is the inverse. */
+  color-scheme: dark;
 
-  --cardinal: #c8102e;
-  --cardinal-dark: #9b0c24;
-  --cardinal-soft: #fbe9ec;
-  --gold: #f1be48;
-  --gold-dark: #8a6200;
-  --gold-soft: #fdf3d6;
+  --accent: #f5f5f5;
+  --on-accent: #0a0a0a;
+  --accent-hover: #ffffff;
+  --accent-soft: #1c1c1c;
+  --accent-2: #a3a3a3;
+  --accent-2-soft: #222222;
 
-  --ink: #1c1917;
-  --muted: #655f59;
-  --paper: #faf8f5;
-  --surface: #ffffff;
-  --surface-2: #f4f0ea;
-  --line: #e4ddd3;
+  /* Names kept from the first design so existing rules keep working. */
+  --cardinal: var(--accent);
+  --cardinal-dark: var(--accent-hover);
+  --cardinal-soft: var(--accent-soft);
+  --gold: var(--accent);
+  --gold-dark: var(--accent-2);
+  --gold-soft: var(--accent-2-soft);
 
-  --ok: #17663f;
-  --ok-soft: #e3f4ea;
-  --warn: #8f4a07;
-  --warn-soft: #fdf0d9;
-  --danger: #b42318;
-  --danger-soft: #fdecea;
-  --info: #1d4f91;
-  --info-soft: #e6eefb;
+  --ink: #f2f2f2;
+  --muted: #9a9a9a;
+  --paper: #0a0a0a;
+  --surface: #121212;
+  --surface-2: #1b1b1b;
+  --line: #2e2e2e;
 
-  --radius: 14px;
-  --radius-sm: 9px;
-  --shadow: 0 1px 2px rgb(28 25 23 / 0.06), 0 6px 18px rgb(28 25 23 / 0.06);
-  --shadow-lift: 0 2px 4px rgb(28 25 23 / 0.08), 0 14px 32px rgb(28 25 23 / 0.12);
+  /* Status colors stay muted but real: meaning should not depend on gray alone. */
+  --ok: #7ee2a8;
+  --ok-soft: #10251a;
+  --warn: #f0c36a;
+  --warn-soft: #2a2110;
+  --danger: #ff8f84;
+  --danger-soft: #2c1512;
+  --info: #b8c4d6;
+  --info-soft: #1a1f27;
+
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 0 0 1px rgb(255 255 255 / 0.02);
+  --shadow-lift: 0 0 0 1px var(--ink), 0 10px 30px rgb(0 0 0 / 0.5);
 
   --font-body: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-head: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-head: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+:root[data-theme='light'] {
+  color-scheme: light;
 
-    --cardinal: #e5334f;
-    --cardinal-dark: #ff6b82;
-    --cardinal-soft: #3a1118;
-    --gold-dark: #f1be48;
-    --gold-soft: #3a2f10;
+  --accent: #0a0a0a;
+  --on-accent: #fafafa;
+  --accent-hover: #000000;
+  --accent-soft: #ececec;
+  --accent-2: #5c5c5c;
+  --accent-2-soft: #e4e4e4;
 
-    --ink: #f4efe8;
-    --muted: #b6aea4;
-    --paper: #141210;
-    --surface: #1d1a17;
-    --surface-2: #26221e;
-    --line: #38322c;
+  --ink: #0a0a0a;
+  --muted: #5c5c5c;
+  --paper: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f0f0f0;
+  --line: #d4d4d4;
 
-    --ok: #5fd39a;
-    --ok-soft: #12301f;
-    --warn: #f3b565;
-    --warn-soft: #36240c;
-    --danger: #ff8a7d;
-    --danger-soft: #3a1612;
-    --info: #8db8f5;
-    --info-soft: #14243d;
+  --ok: #14633b;
+  --ok-soft: #e1f3e8;
+  --warn: #7a4a00;
+  --warn-soft: #fbf0d6;
+  --danger: #a31b10;
+  --danger-soft: #fbe8e5;
+  --info: #35435a;
+  --info-soft: #e9edf3;
 
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 6px 18px rgb(0 0 0 / 0.3);
-    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.5), 0 14px 32px rgb(0 0 0 / 0.45);
-  }
+  --shadow-lift: 0 0 0 1px var(--ink), 0 10px 30px rgb(0 0 0 / 0.15);
 }
