@@ -5,8 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CourseFlow | Plan your CPRE courses at Iowa State</title>
-    <meta name="theme-color" content="#c8102e" />
+    <meta name="theme-color" content="#0a0a0a" />
     <meta name="description" content="CourseFlow helps Iowa State computer engineering students plan courses by semester, see the cost, and pay per semester." />
+    <script>
+      // Pick the theme before first paint so there is no flash. Dark is the default.
+      try {
+        var saved = localStorage.getItem('courseflow:theme')
+        var light = saved ? saved === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches
+        document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark')
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
