@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import { getCourse } from '../data/catalog.js'
+import { useToast } from '../hooks/useToast.js'
+import { planToText } from '../utils/exportPlan.js'
 import AddSemesterForm from '../components/AddSemesterForm.jsx'
 import CompletedCourses from '../components/CompletedCourses.jsx'
 import ProgressSummary from '../components/ProgressSummary.jsx'
@@ -9,6 +12,16 @@ import { formatMoney } from '../utils/pricing.js'
 
 function Planner() {
   const { state, semesters, cartCourses } = usePlanner()
+  const { notify } = useToast()
+
+  async function copyPlan() {
+    try {
+      await navigator.clipboard.writeText(planToText(state, getCourse))
+      notify('Plan copied. Paste it into an email or notes.')
+    } catch {
+      notify('Could not copy. Use Print instead.')
+    }
+  }
 
   const moveTargets = semesters.filter((semester) => !semester.receipt).map(({ id, label }) => ({ id, label }))
   const unpaid = semesters.filter((semester) => !semester.receipt)
@@ -24,6 +37,14 @@ function Planner() {
           Each card is one semester. Move courses around and the credits, warnings and cost update right
           away. Pay a semester when you are ready and it locks.
         </p>
+        <div className="row no-print">
+          <button type="button" className="btn btn--ghost btn--sm" onClick={copyPlan}>
+            Copy plan as text
+          </button>
+          <button type="button" className="btn btn--ghost btn--sm" onClick={() => window.print()}>
+            Print plan
+          </button>
+        </div>
       </div>
 
       <div className="planner-layout">
