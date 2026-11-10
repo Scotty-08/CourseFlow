@@ -89,7 +89,7 @@ function Payment() {
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return
 
-    setTransactionId(`SF-${Math.floor(100000 + Math.random() * 900000)}`)
+    setTransactionId(`CF-${Math.floor(100000 + Math.random() * 900000)}`)
     setPaid(true)
   }
 
