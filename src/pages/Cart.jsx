@@ -32,12 +32,18 @@ function Cart() {
         <EmptyState
           title="Your cart is empty"
           action={
-            <Link to="/" className="btn btn--primary">
-              Browse courses
-            </Link>
+            <div className="row">
+              <Link to="/" className="btn btn--primary">
+                Browse courses
+              </Link>
+              <Link to="/planner" className="btn btn--ghost">
+                Open planner
+              </Link>
+            </div>
           }
         >
-          Add courses from the catalog and they will show up here.
+          Add courses from the catalog and they will show up here. Courses you have already placed in a
+          semester live in the planner.
         </EmptyState>
       ) : (
         <div className="two-col">
