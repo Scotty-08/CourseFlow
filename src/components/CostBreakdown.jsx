@@ -30,7 +30,11 @@ function CostBreakdown({ pricing }) {
           {creditsUntilCapBinds()} credits.
         </p>
       )}
-      {capApplied && <p className="cost__note">The {formatMoney(cap)} cap saved you {formatMoney(Math.abs(savings))} this semester.</p>}
+      {capApplied && savings > 0 && (
+        <p className="cost__note">
+          The {formatMoney(cap)} cap saved you {formatMoney(savings)} this semester.
+        </p>
+      )}
     </div>
   )
 }
