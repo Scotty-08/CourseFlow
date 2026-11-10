@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useTheme } from '../hooks/useTheme.js'
 import { usePlanner } from '../state/PlannerContext.jsx'
 
 const links = [
@@ -9,6 +10,7 @@ const links = [
 
 function SiteHeader() {
   const { state } = usePlanner()
+  const { theme, toggle } = useTheme()
 
   return (
     <header className="site-header">
@@ -17,8 +19,9 @@ function SiteHeader() {
           <span className="brand__mark" aria-hidden="true">
             CF
           </span>
-          <span className="brand__text">
-            Course<span className="brand__flow">Flow</span>
+          <span className="brand__text glitch-hover">
+            ~/course<span className="brand__flow">flow</span>
+            <span className="brand__cursor" aria-hidden="true" />
           </span>
         </NavLink>
         <nav className="nav" aria-label="Main">
@@ -37,6 +40,15 @@ function SiteHeader() {
               )}
             </NavLink>
           ))}
+          <button
+            type="button"
+            className="nav__theme"
+            onClick={toggle}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            title="Toggle theme"
+          >
+            {theme === 'dark' ? '☀' : '☾'}
+          </button>
         </nav>
       </div>
     </header>
