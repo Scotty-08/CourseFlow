@@ -54,7 +54,10 @@ function Checkout() {
     zip: '',
   })
 
-  useEffect(() => () => clearTimeout(timer.current), [])
+  useEffect(() => {
+    const pending = timer
+    return () => clearTimeout(pending.current)
+  }, [])
 
   const semester = semesters.find((item) => item.id === semesterId)
 
