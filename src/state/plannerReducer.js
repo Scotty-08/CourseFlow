@@ -103,7 +103,7 @@ export function plannerReducer(state, action) {
       const { semesterId } = action
       if (state.paid[semesterId]) return state
       const returning = state.plan[semesterId] ?? []
-      const { [semesterId]: _removed, ...plan } = state.plan
+      const plan = Object.fromEntries(Object.entries(state.plan).filter(([id]) => id !== semesterId))
       return {
         ...state,
         semesters: without(state.semesters, semesterId),
