@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import ChatWidget from './components/ChatWidget.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
 import Cart from './pages/Cart.jsx'
@@ -25,6 +26,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <SiteFooter />
+      <ChatWidget />
     </>
   )
 }
