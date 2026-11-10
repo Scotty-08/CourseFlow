@@ -3,8 +3,8 @@ import { courses } from '../data/catalog.js'
 import { MAX_CREDITS, TARGET_CREDITS } from '../config.js'
 import { useToast } from '../hooks/useToast.js'
 import { usePlanner } from '../state/PlannerContext.jsx'
-import { semesterLabel, sortSemesters, upcomingSemester } from '../utils/semester.js'
-import { suggestPlan } from '../utils/suggest.js'
+import { buildSuggestion } from '../utils/planFromState.js'
+import { semesterLabel } from '../utils/semester.js'
 
 /** Builds a prerequisite-safe plan for everything that is left, then lets the student apply it. */
 function SuggestPlanPanel() {
@@ -18,10 +18,7 @@ function SuggestPlanPanel() {
   )
 
   function build() {
-    const unpaid = sortSemesters(state.semesters).filter((id) => !state.paid[id])
-    const startSemester = unpaid.find((id) => includeSummer || !id.endsWith('summer')) ?? upcomingSemester()
-    const preferred = [...state.cart, ...Object.values(state.plan).flat()]
-    const result = suggestPlan({ courses, satisfied, preferred, startSemester, includeSummer })
+    const { result } = buildSuggestion({ courses, state, satisfied, includeSummer })
 
     if (result.semesters.length === 0) {
       notify('Nothing left to plan. Every requirement is done or paid.')
