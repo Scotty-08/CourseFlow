@@ -7,7 +7,10 @@ import { locateCourse } from '../state/plannerReducer.js'
 function CompletedCourses() {
   const { state, completedCourses } = usePlanner()
   const actions = useCourseActions()
-  const candidates = courses.filter((course) => locateCourse(state, course.id) === null || locateCourse(state, course.id) === 'cart' || locateCourse(state, course.id) === 'planned')
+  const candidates = courses.filter((course) => {
+    const where = locateCourse(state, course.id)
+    return where === null || where === 'cart' || where === 'planned'
+  })
 
   return (
     <section className="card" aria-labelledby="completed-title">
