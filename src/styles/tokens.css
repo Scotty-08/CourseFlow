@@ -1,0 +1,74 @@
+/* Design tokens. Iowa State cardinal and gold on a warm paper background. */
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-cardinal: #c8102e;
+  --color-gold: #f1be48;
+}
+
+:root {
+  color-scheme: light;
+
+  --cardinal: #c8102e;
+  --cardinal-dark: #9b0c24;
+  --cardinal-soft: #fbe9ec;
+  --gold: #f1be48;
+  --gold-dark: #8a6200;
+  --gold-soft: #fdf3d6;
+
+  --ink: #1c1917;
+  --muted: #655f59;
+  --paper: #faf8f5;
+  --surface: #ffffff;
+  --surface-2: #f4f0ea;
+  --line: #e4ddd3;
+
+  --ok: #17663f;
+  --ok-soft: #e3f4ea;
+  --warn: #8f4a07;
+  --warn-soft: #fdf0d9;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --info: #1d4f91;
+  --info-soft: #e6eefb;
+
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: 0 1px 2px rgb(28 25 23 / 0.06), 0 6px 18px rgb(28 25 23 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(28 25 23 / 0.08), 0 14px 32px rgb(28 25 23 / 0.12);
+
+  --font-body: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-head: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --cardinal: #e5334f;
+    --cardinal-dark: #ff6b82;
+    --cardinal-soft: #3a1118;
+    --gold-dark: #f1be48;
+    --gold-soft: #3a2f10;
+
+    --ink: #f4efe8;
+    --muted: #b6aea4;
+    --paper: #141210;
+    --surface: #1d1a17;
+    --surface-2: #26221e;
+    --line: #38322c;
+
+    --ok: #5fd39a;
+    --ok-soft: #12301f;
+    --warn: #f3b565;
+    --warn-soft: #36240c;
+    --danger: #ff8a7d;
+    --danger-soft: #3a1612;
+    --info: #8db8f5;
+    --info-soft: #14243d;
+
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 6px 18px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.5), 0 14px 32px rgb(0 0 0 / 0.45);
+  }
+}
