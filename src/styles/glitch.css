@@ -1,0 +1,133 @@
+/* Glitch effects. Buttons glitch on hover or focus; the hero title glitches now and then.
+   Everything here is switched off for people who ask for reduced motion. */
+
+@keyframes glitch-btn {
+  0% {
+    transform: translate(0);
+    text-shadow: none;
+    clip-path: inset(0);
+  }
+  18% {
+    transform: translate(-3px, 1px);
+    text-shadow: 2px 0 var(--accent-2), -2px 0 var(--ink);
+    clip-path: inset(8% 0 52% 0);
+  }
+  36% {
+    transform: translate(3px, -1px);
+    text-shadow: -2px 0 var(--accent-2), 2px 0 var(--ink);
+    clip-path: inset(52% 0 6% 0);
+  }
+  54% {
+    transform: translate(-1px, 0);
+    text-shadow: 1px 0 var(--accent-2);
+    clip-path: inset(0 0 30% 0);
+  }
+  72% {
+    transform: translate(2px, 1px);
+    text-shadow: -1px 0 var(--ink);
+    clip-path: inset(30% 0 0 0);
+  }
+  100% {
+    transform: translate(0);
+    text-shadow: none;
+    clip-path: inset(0);
+  }
+}
+
+.btn--primary:hover:not(:disabled),
+.btn--primary:focus-visible,
+.btn--gold:hover:not(:disabled),
+.btn--gold:focus-visible,
+.glitch-hover:hover,
+.glitch-hover:focus-visible {
+  animation: glitch-btn 0.42s steps(2, end) 1;
+}
+
+/* Title with two offset copies that flicker apart for a moment, every few seconds. */
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.glitch-text::before {
+  color: var(--accent-2);
+  animation: glitch-a 7s infinite;
+}
+
+.glitch-text::after {
+  color: var(--ink);
+  animation: glitch-b 7s infinite;
+}
+
+@keyframes glitch-a {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0);
+  }
+  93% {
+    opacity: 0.9;
+    transform: translate(-4px, 1px);
+    clip-path: inset(12% 0 60% 0);
+  }
+  95% {
+    opacity: 0.9;
+    transform: translate(3px, -1px);
+    clip-path: inset(58% 0 8% 0);
+  }
+  97% {
+    opacity: 0.9;
+    transform: translate(-2px, 0);
+    clip-path: inset(34% 0 36% 0);
+  }
+}
+
+@keyframes glitch-b {
+  0%,
+  93%,
+  100% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0);
+  }
+  94% {
+    opacity: 0.8;
+    transform: translate(4px, -1px);
+    clip-path: inset(50% 0 20% 0);
+  }
+  96% {
+    opacity: 0.8;
+    transform: translate(-3px, 1px);
+    clip-path: inset(6% 0 66% 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--primary:hover:not(:disabled),
+  .btn--primary:focus-visible,
+  .btn--gold:hover:not(:disabled),
+  .btn--gold:focus-visible,
+  .glitch-hover:hover,
+  .glitch-hover:focus-visible {
+    animation: none;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after,
+  .brand__cursor,
+  .term__cursor {
+    animation: none;
+  }
+}
