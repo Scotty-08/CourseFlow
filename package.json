@@ -15,7 +15,7 @@
     "react-dom": "^19.3.1",
     "react-router-dom": "^7.18.5",
     "tailwindcss": "^4.3.5",
-    "@fontsource-variable/bricolage-grotesque": "^5.2.0",
+    "@fontsource-variable/jetbrains-mono": "^5.2.0",
     "@fontsource-variable/inter": "^5.2.0"
   },
   "devDependencies": {
